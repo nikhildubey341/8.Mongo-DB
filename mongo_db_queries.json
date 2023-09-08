@@ -1,0 +1,115 @@
+use database
+
+// show dbs
+
+db.createCollection("collectionname")
+
+db.dropDatabase()
+
+db.collectionname.drop()
+*/
+//files adding command
+
+db.collectionname.find()       // to show the datas
+
+
+db.collectionname.insertOne({
+    name:'JSR',
+    age:'20',
+    rollno:'1234',
+})
+
+db.collectionname.insertOne({
+    name:'Jitendra',
+})
+
+
+db.collectionname.insertOne({
+    name:'J',
+    age:'20',
+    rollno:'1234',
+},{
+    name:'S',
+    age:'21',
+    rollno:'2345',
+}
+)          // by this only first one is added
+
+
+db.collectionname.insertMany([{
+    name:'JS',
+    age:'20',
+    rollno:'1234',
+},{
+    name:'SR',
+    age:'21',
+    rollno:'2345',
+}]
+) 
+
+
+in the data.json to find the brand appple
+use products
+then db.electronics.find({brand:'Apple'})
+
+to show prices of data with brand as apple
+
+db.electronics.find({brand:'Apple'},{price:1})
+  { _id: ObjectId("64f5c04afffd57dc25da1231"), price: 549 },
+  { _id: ObjectId("64f5c04afffd57dc25da1232"), price: 899 },
+  { _id: ObjectId("64f5c04afffd57dc25da1236"), price: 1749 }
+
+db.electronics.find({brand:'Apple'},{_id:0,price:1})
+{ price: 549 }, { price: 899 }, { price: 1749 }
+
+to count the no. of apple brands
+db.electronics.find({brand:'Apple'}).count()
+
+
+Questions to do:-
+1. 15% se jyada discount waalo ka title price brands
+
+db.electronics.find({discountPercentage:{$gt:15}})   // can also be written as db.electronics.find({"discountPercentage":{$gt:15}})
+
+2. jinka category laptop unko print karna
+
+db.electronics.find({category:'laptops'})
+
+3. 5 products ko iss tarah se ki highest discount waala highest par
+
+db.electronics.find().sort({discountPercentage:-1}).limit(5)   // -1 is for descending order i.e. highest to loweest and limit is for providing the 5 results
+
+
+
+
+
+** comparison operators:
+
+$eq:-  equalss to
+$neq:-  not equals to
+$gt:-   greater than
+$gte:-  greater than equals to
+$lt:-  less than
+$lte:-  less than equals to
+$in:-  inside
+$nin:-  not inside
+
+
+
+* to show those have price = 60, 20, 80
+
+=>db.electronics.find({price:{$in:[60,20,80]}})
+
+* to show those not have price = 60, 20, 80
+
+=>db.electronics.find({price:{$nin:[60,20,80]}})
+
+** cursor methods
+
+count()
+limit()
+skip()
+sort()  1 for ascending and -1 for descending
+
+* 5 data price is greater than 250 
+* shuruat ke 2 data ko skip karna
